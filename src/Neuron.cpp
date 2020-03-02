@@ -41,7 +41,7 @@ class Neuron {
         }
         void transferSignals() {
             for (int i=0;i<connectionCount;i++) {
-                connections[i]->usage = connections[i]->usage * 0.5;
+                connections[i]->usage = connections[i]->usage * 0.9;
             }
             if (activated) {
                 for (int i=0;i<connectionCount;i++) {

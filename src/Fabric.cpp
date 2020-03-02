@@ -72,8 +72,12 @@ class Fabric {
             }}}
         }
         void dullConnections(float strength) {
+            float randomNum;
             for (int x=0;x<fabricSizeX;x++) { for (int y=0;y<fabricSizeY;y++) { for (int z=0;z<fabricSizeZ;z++) {
-                getNeuron(x,y,z)->dullConnections(strength);
+                randomNum = (float) (rand() / ((float) RAND_MAX));
+                if (randomNum > (1.0-(1.0/(float)getSize(-1)))) {
+                    getNeuron(x,y,z)->dullConnections(strength);
+                }
             }}}
         }
         int getSize(int index) {

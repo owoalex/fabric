@@ -105,9 +105,9 @@ int main(int argc, char** argv) {
     std::string fabricSize = "";
     std::string trainingDataFile = "";
     dataFolder = std::string(getenv("HOME")) + "/data";
-    float activationThreshold = 0.5;
-    float learningRate = 0.5;
-    float novelizingRate = 0.5;
+    float activationThreshold = 0.4;
+    float learningRate = 0.02;
+    float novelizingRate = 0.2;
 
     int mode = 2;
     /*  MODES
@@ -186,27 +186,30 @@ int main(int argc, char** argv) {
         if (fabric->getNeuron(1,1,2)->isActivated()) {
             rewardFunction += 1;
         } else {
-            rewardFunction -= 1;
+            //rewardFunction -= 1;
         }
         if (!(fabric->getNeuron(1,2,2)->isActivated())) {
             rewardFunction += 1;
         } else {
-            rewardFunction -= 1;
+            //rewardFunction -= 1;
         }
         if (!(fabric->getNeuron(2,1,2)->isActivated())) {
             rewardFunction += 1;
         } else {
-            rewardFunction -= 1;
+            //rewardFunction -= 1;
         }
         if (fabric->getNeuron(2,2,2)->isActivated()) {
             rewardFunction += 1;
         } else {
-            rewardFunction -= 1;
+            //rewardFunction -= 1;
         }
         rewardFunction = rewardFunction;
+        if (rewardFunction != 4) {
+            rewardFunction = 0;
+        }
         fabric->backPropogate(learningRate * rewardFunction);
         fabric->randomAdjust(novelizingRate);
-        fabric->dullConnections(novelizingRate/5000);
+        fabric->dullConnections(novelizingRate/64);
     }
     
     return 1;
